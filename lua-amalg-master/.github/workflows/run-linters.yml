@@ -1,0 +1,21 @@
+name: run-linters
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: github/super-linter/slim@v4
+        env:
+          DEFAULT_BRANCH: master
+          LOG_LEVEL: NOTICE
+          SUPPRESS_POSSUM: true
+          VALIDATE_CLANG_FORMAT: false
+          VALIDATE_GITHUB_ACTIONS: false
+          GITHUB_TOKEN: ${{ github.token }}
+

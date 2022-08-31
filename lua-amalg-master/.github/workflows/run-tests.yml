@@ -1,0 +1,54 @@
+name: run-tests
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        luaVersion: ["5.1", "5.2", "5.3", "5.4"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: leafo/gh-actions-lua@v9
+        with:
+          luaVersion: ${{ matrix.luaVersion }}
+      - uses: leafo/gh-actions-luarocks@v4
+        with:
+          luarocksVersion: "3.9.0"
+      - run: luarocks install luasrcdiet
+      - run: luarocks install dumbluaparser
+      - run: luarocks install moonscript
+      - run: luarocks install tl
+      - run: luarocks install fennel
+      - run: luarocks install brieflz
+      - run: '( cd tests && ./run.sh github keep )'
+      - uses: actions/upload-artifact@v3
+        with:
+          name: amalgamations-${{ matrix.luaVersion }}
+          path: |
+            tests/modules-only.lua
+            tests/modules-with-stubbed-require.lua
+            tests/modules-as-fallbacks.lua
+            tests/modules-and-script.lua
+            tests/binary-modules-and-script.lua
+            tests/compiled-and-zipped.lua
+            tests/amalgamated-then-zipped.lua
+            tests/script-on-diet1.lua
+            tests/script-on-diet2.lua
+            tests/no-arg-fix.lua
+            tests/with-debug-mode.lua
+            tests/modules-only-from-cache.lua
+            tests/modules-and-script-from-cache.lua
+            tests/lua-and-c-modules.lua
+            tests/lua-and-moonscript-modules.lua
+            tests/lua-and-teal-modules.lua
+            tests/lua-and-fennel-modules.lua
+            tests/lua-and-c-modules-zipped.lua
+            tests/lua-and-c-modules-amalgamated-then-zipped.lua
+            tests/with-ignored-modules.lua
+            tests/with-virtual-io.lua
+            tests/amalg.cache
+
