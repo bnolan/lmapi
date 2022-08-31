@@ -1,5 +1,5 @@
-local typeof = import("./functions/typeof")
-local assign = import("./assign")
+local typeof = require("typeof")
+local assign = require("assign")
 
 local InstanceProperty = {}
 

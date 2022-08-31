@@ -7,10 +7,10 @@
 	* init, called by the class's constructor
 ]]
 
-local assign = import("../assign")
-local InstanceProperty = import("../InstanceProperty")
-local Signal = import("../Signal")
-local typeKey = import("../typeKey")
+local assign = require("assign")
+local InstanceProperty = require("InstanceProperty")
+local Signal = require("Signal")
+local typeKey = require("typeKey")
 
 local function isInstance(value)
 	local metatable = getmetatable(value)
@@ -359,6 +359,8 @@ function BaseInstance:new(...)
 	assign(getmetatable(instance), self.metatable)
 	getmetatable(instance).instance = internalInstance
 	getmetatable(instance).class = self
+
+	print(internalInstance.properties)
 
 	for key, property in pairs(self.properties) do
 		internalInstance.properties[key] = property.getDefault(instance)

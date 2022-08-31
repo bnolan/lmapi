@@ -5,7 +5,7 @@
 	executing an event.
 ]]
 
-local typeKey = import("./typeKey")
+local typeKey = require("typeKey")
 
 local function immutableAppend(list, ...)
 	local new = {}

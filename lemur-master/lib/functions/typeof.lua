@@ -1,4 +1,4 @@
-local typeKey = import("../typeKey")
+local typeKey = require("typeKey")
 
 local function typeof(object)
 	local realType = type(object)
