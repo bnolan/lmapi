@@ -1,6 +1,6 @@
-local assign = import("../assign")
-local typeKey = import("../typeKey")
-local typeof = import("../functions/typeof")
+local assign = require("assign")
+local typeKey = require("typeKey")
+local typeof = require("typeof")
 
 local Vector2 = {}
 

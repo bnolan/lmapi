@@ -25,8 +25,13 @@ local Folder = BaseInstance:extend("Folder", {
 
 local Instance = {}
 
+local instances = { 
+  Folder = Folder, 
+  VoxModel = require("VoxModel")
+}
+
 function Instance.new(className, parent)
-  local class = Folder -- instances[className]
+  local class = instances[className]
 
   if class == nil or not class.options.creatable then
     error(string.format("Can't make an instance of type %q", tostring(className)), 2)
@@ -49,7 +54,7 @@ local parent = Instance.new("Folder")
 print("zing")
 print(parent)
 
-local child = Instance.new("Folder", parent)
+local child = Instance.new("VoxModel", parent)
 child.Name = "foo"
 
 assert(child.Parent == parent)

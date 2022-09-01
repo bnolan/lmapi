@@ -1,5 +1,5 @@
-local assign = import("../assign")
-local typeKey = import("../typeKey")
+local assign = require("assign")
+local typeKey = require("typeKey")
 
 local function lerpNumber(a, b, alpha)
 	return (1 - alpha) * a + b * alpha
