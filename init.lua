@@ -18,6 +18,7 @@ end
 
 -- local Habitat = baste.import("./Habitat")
 local BaseInstance = require("BaseInstance")
+local Vector3 = require('Vector3')
 
 local Folder = BaseInstance:extend("Folder", {
   creatable = true,
@@ -62,3 +63,11 @@ assert(parent:FindFirstChild("foo") == child)
 
 print(child.Name)
 print(child.Parent.Name)
+
+local v = Instance.new("VoxModel")
+v.Position.X = 3.141
+v.Position.Y = 6.42
+v.Position.Z = 7.12
+
+print(v.Position:Inspect())
+

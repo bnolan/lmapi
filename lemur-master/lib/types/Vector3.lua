@@ -12,6 +12,10 @@ setmetatable(Vector3, {
 
 local prototype = {}
 
+function prototype:Inspect()
+	return string.format("<Vector3 %0.2f, %0.2f, %0.2f>", self.X, self.Y, self.Z)
+end
+
 local metatable = {}
 metatable[typeKey] = "Vector3"
 
